@@ -1,0 +1,14 @@
+#+title: ~tsoding-tasks~
+
+#+begin_quote
+[!WARNING]
+This package is primarily meant for demonstration purposes.
+#+end_quote
+
+Inspired by [[https://github.com/tsoding][@tsoding]] and his video [[https://www.youtube.com/watch?v=QH6KOEVnSZA][I Wrote an Emacs Plugin]].
+
+This is based on his implementation, with a few more features:
+
+- Added a  ~thing-at-point~ provider so functions can call ~(thing-at-point 'tsoding/huid)~
+- An xref backend, so that ~M-.~ and ~M-,~ work viewing a task and returning to
+  your place.
