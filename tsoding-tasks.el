@@ -84,7 +84,7 @@
    when (file-directory-p tasks-dir)
    return tasks-dir))
 
-(defun tsoding-tasks-find-huid (huid &optional ensure-exists)
+(defun tsoding-tasks-find-huid (huid &optional ensure-exists other-window)
   (interactive (list (or
                       (thing-at-point 'tsoding/huid)
                       (read-string "HUID: "))))
@@ -94,8 +94,10 @@
     (when (and ensure-exists
                (not (file-directory-p task-dir)))
       (make-directory task-dir))
-    (xref-push-marker-stack)
-    (find-file task-md)))
+    (if other-window
+        (find-file-other-window task-md)
+      (xref-push-marker-stack)
+      (find-file task-md))))
 
 (defun tsoding-tasks-todo-to-task ()
   (interactive)
@@ -107,7 +109,7 @@
        (line-beginning-position)
        (line-end-position)
        (lambda (&rest _args) (concat prefix "TASK(" huid "): " suffix)))
-      (tsoding-tasks-find-huid huid t)
+      (tsoding-tasks-find-huid huid t t)
       (insert (format "# %s\n" suffix))
       (insert "\n")
       (insert "- STATUS: OPEN\n")
